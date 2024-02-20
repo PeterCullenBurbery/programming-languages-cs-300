@@ -63,9 +63,10 @@ def addChar():
         lexeme[lexLen] = "\0"
     else:
         # print("Error - lexeme is too long \n")
+        #make the array lexeme bigger
         lexeme.append(nextChar)
         lexeme.append("\0")
-        lexeme[lexLen] = "\0"
+        lexLen += 1
 
 
 def getChar():
@@ -111,7 +112,8 @@ def lex():
             addChar()
             getChar()
         intStr = "".join(lexeme).strip()
-        intStr = intStr.strip('\x00')
+        #replace \x00 with nothing in the string intStr
+        intStr = intStr.replace("\x00", "")
         bigInt = int(intStr)
         if bigInt > 2**63 - 1:
             raise ValueError("Value too large")
@@ -129,10 +131,12 @@ def lex():
     str_lexeme = "".join(lexeme)
     print("Next token is:", nextToken, "Next lexeme is", str_lexeme)
 
-
+simplefile = "C:\\Users\\peter\\OneDrive - Marshall University\\GitHub\\programming-languages-cs-300\\homework-3-parser\\simple-example-that-works.txt"
+longidentifier = "C:\\Users\\peter\\OneDrive - Marshall University\\GitHub\\programming-languages-cs-300\\homework-3-parser\\long-identifier-name.txt"
+reallybignumber="C:\\Users\\peter\\OneDrive - Marshall University\\GitHub\\programming-languages-cs-300\\homework-3-parser\\really-big-number.txt"
 if __name__ == "__main__":
     # Getting the file and removing the spaces to be able to read the file easier
-    with open("C:\\Users\\peter\\OneDrive - Marshall University\\Documents\\spring-2024\\cs-300-201\\homeworks\\homework-3-parser\\really-big-number.txt", "r") as file:
+    with open(reallybignumber, "r") as file:
         line = file.readline().replace(" ", "")
         # print(
         #     line

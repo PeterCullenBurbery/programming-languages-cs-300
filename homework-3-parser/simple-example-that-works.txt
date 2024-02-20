@@ -1,1 +1,1 @@
-(sum+47)/total
+(sum+74112222)/total
