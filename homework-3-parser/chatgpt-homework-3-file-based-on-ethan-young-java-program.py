@@ -15,15 +15,16 @@ DIGIT = 1
 UNKNOWN = 99
 
 # Token codes
-INT_LIT = 10
-IDENT = 11
-ASSIGN_OP = 20
-ADD_OP = 21
-SUB_OP = 22
-MULT_OP = 23
-DIV_OP = 24
-LEFT_PAREN = 25
-RIGHT_PAREN = 26
+INT_LIT = "INT_LIT"
+IDENT = "IDENT"
+ASSIGN_OP = "ASSIGN_OP"
+ADD_OP = "ADD_OP"
+SUB_OP = "SUB_OP"
+MULT_OP = "MULT_OP"
+DIV_OP = "DIV_OP"
+LEFT_PAREN = "LEFT_PAREN"
+RIGHT_PAREN = "RIGHT_PAREN"
+SEMICOLON = "SEMICOLON"
 EOF = -1
 
 
@@ -49,6 +50,9 @@ def lookup(ch):
     elif ch == "=":
         addChar()
         nextToken = ASSIGN_OP
+    elif ch == ";":
+        addChar()
+        nextToken = SEMICOLON
     else:
         addChar()
         nextToken = EOF
@@ -63,7 +67,7 @@ def addChar():
         lexeme[lexLen] = "\0"
     else:
         # print("Error - lexeme is too long \n")
-        #make the array lexeme bigger
+        # make the array lexeme bigger
         lexeme.append(nextChar)
         lexeme.append("\0")
         lexLen += 1
@@ -112,7 +116,7 @@ def lex():
             addChar()
             getChar()
         intStr = "".join(lexeme).strip()
-        #replace \x00 with nothing in the string intStr
+        # replace \x00 with nothing in the string intStr
         intStr = intStr.replace("\x00", "")
         bigInt = int(intStr)
         if bigInt > 2**63 - 1:
@@ -131,9 +135,10 @@ def lex():
     str_lexeme = "".join(lexeme)
     print("Next token is:", nextToken, "Next lexeme is", str_lexeme)
 
+
 simplefile = "C:\\Users\\peter\\OneDrive - Marshall University\\GitHub\\programming-languages-cs-300\\homework-3-parser\\simple-example-that-works.txt"
 longidentifier = "C:\\Users\\peter\\OneDrive - Marshall University\\GitHub\\programming-languages-cs-300\\homework-3-parser\\long-identifier-name.txt"
-reallybignumber="C:\\Users\\peter\\OneDrive - Marshall University\\GitHub\\programming-languages-cs-300\\homework-3-parser\\really-big-number.txt"
+reallybignumber = "C:\\Users\\peter\\OneDrive - Marshall University\\GitHub\\programming-languages-cs-300\\homework-3-parser\\really-big-number.txt"
 if __name__ == "__main__":
     # Getting the file and removing the spaces to be able to read the file easier
     with open(reallybignumber, "r") as file:
