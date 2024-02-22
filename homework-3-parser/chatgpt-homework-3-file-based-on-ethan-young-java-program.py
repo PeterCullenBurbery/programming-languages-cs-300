@@ -139,10 +139,11 @@ def lex():
 simplefile = "C:\\Users\\peter\\OneDrive - Marshall University\\GitHub\\programming-languages-cs-300\\homework-3-parser\\simple-example-that-works.txt"
 longidentifier = "C:\\Users\\peter\\OneDrive - Marshall University\\GitHub\\programming-languages-cs-300\\homework-3-parser\\long-identifier-name.txt"
 reallybignumber = "C:\\Users\\peter\\OneDrive - Marshall University\\GitHub\\programming-languages-cs-300\\homework-3-parser\\really-big-number.txt"
+filewithspacesandotherwhitespacecharacters="C:\\Users\\peter\\OneDrive - Marshall University\\GitHub\\programming-languages-cs-300\\homework-3-parser\\file-with-spaces-and-other-whitespace-characters.txt"
 if __name__ == "__main__":
     # Getting the file and removing the spaces to be able to read the file easier
-    with open(reallybignumber, "r") as file:
-        line = file.readline().replace(" ", "")
+    with open(filewithspacesandotherwhitespacecharacters, "r") as file:
+        line = file.readline().replace(" ", "").replace("\n", "").replace("\t", "").replace("\r", "").replace("\v", "").replace("\f", "") # Removing the spaces and other whitespace characters with the empty string.
         # print(
         #     line
         # )  # Just printing the line to make sure the analyzer didn't miss something
